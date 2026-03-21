@@ -9,7 +9,7 @@ build/
 *.log
 
 # IDEs
-.iml
+*.iml
 .idea/
 
 node_modules/
