@@ -1,0 +1,21 @@
+target/
+build/
+*.class
+*.jar
+*.war
+*.ear
+
+# Logs
+*.log
+
+# IDEs
+.iml
+.idea/
+
+node_modules/
+dist/
+build/
+.env
+.env.local
+.env.*.local
+
