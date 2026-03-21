@@ -12,7 +12,7 @@ build/
 *.iml
 .idea/
 
-*.db
+*.properties
 
 node_modules/
 dist/
