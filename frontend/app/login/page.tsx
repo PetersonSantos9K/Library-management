@@ -1,4 +1,8 @@
+import LayoutFormSidePanel from "@/components/layout/LayoutFormSidePanel";
+import Login from "./Login";
 
 export default function Home() {
-  return <h1>Aqui sera a pagina de login</h1>
+  return <LayoutFormSidePanel>
+    <Login/>
+  </LayoutFormSidePanel>
 }

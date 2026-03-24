@@ -1,31 +1,128 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-dm-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-sans-display: var(--font-dm-serif);
-}
 
+  --color-bg:            #080C0A;
+  --color-bg-raised:     #0D1210;
+  --color-bg-surface:    #111815;
+  --color-bg-card:       #0F1410;
+  --color-bg-input:      #0D120E;
+
+  --color-text:          #E8E4DC;
+  --color-text-sub:      #6E6A62;
+  --color-text-muted:    #3A3830;
+  --color-text-logo:     rgba(232,228,220,0.35);
+  
+
+  --color-accent:        #D4A853;
+  --color-accent-dim:    rgba(212,168,83,0.07);
+  --color-accent-glow:   rgba(212,168,83,0.15);
+
+  --color-green:         #7A9E87;
+  --color-green-dim:     rgba(122,158,135,0.08);
+  --color-green-border:  rgba(122,158,135,0.28);
+
+  --color-blue:          #7A90AD;
+  --color-blue-dim:      rgba(122,144,173,0.08);
+  --color-blue-border:   rgba(122,144,173,0.28);
+
+  --color-rose:          #C97B6A;
+  --color-rose-dim:      rgba(201,123,106,0.07);
+  --color-rose-border:   rgba(201,123,106,0.30);
+
+  --color-border:        rgba(255,255,255,0.055);
+  --color-border-md:     rgba(255,255,255,0.09);
+  --color-border-accent: rgba(212,168,83,0.28);
+  
+  --font-serif: var(--font-cormorant-garamond);
+  --font-mono: var(--font-geist-mono);
+  --font-cormorant: (var(--font-cormorant));
+}
+/*
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
     --foreground: #ededed;
   }
 }
+*/
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-sans);
+body{
+  color: white;
+  padding: 0;
+  margin: 0;
+  border: 0;
 }
 
-body h1,h2{
-  font-family: var(--font-sans-display);
+#landing-page > #hero::before{
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient( 90deg, transparent, transparent 119px, rgba(255,255,255,0.015) 119px, rgba(255,255,255,0.015) 120px);
+  pointer-events: none;
+
+}
+
+
+#landing-page > #hero > #hero-glow{
+  position: absolute;
+  top: 20%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 600px;
+  height: 400px;
+  background: radial-gradient(ellipse, rgba(212,168,83,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+#landing-page > #hero > #hero-glow-bottom{
+    position: absolute;
+    bottom: -100px; 
+    left: 50%; 
+    transform: translateX(-50%);
+    width: 800px; 
+    height: 400px;
+    background: radial-gradient(ellipse, rgba(212,168,83,0.04) 0%, transparent 70%);
+    pointer-events: none;
+}
+
+#landing-page > #hero > div > #hero-eyebrow{
+  animation: fadeUp 0.6s ease 0.1s both;
+} 
+#hero-eyebrow::before, #landing-page > #hero > div > #hero-eyebrow::after{
+  content: '';
+  width: 20px; 
+  height: 1px;
+  background: var(--color-accent); 
+  opacity: 0.5;
+}
+
+
+#landing-page > #hero > div > #hero-eyebrow::before, #landing-page > #hero > div > h1{
+  animation: fadeUp 0.7s ease 0.2s both;
+}
+
+#landing-page > #hero > div > #hero-eyebrow::before, #landing-page > #hero > div > #hero-sub{
+  animation: fadeUp 0.7s ease 0.35s both;
+}
+
+#landing-pate > #hero > #hero-cta #index-0::after{
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
+    transform: translateX(-100%); transition: transform 0.5s;
+}
+
+#landing-pate > #hero > #hero-cta #index-0:hover::after{
+  transform: translateX(100%);
+}
+
+#landing-pate > #hero > #hero-cta #index-0:hover{
+  opacity: 0.9;
+  
+}
+
+
+@keyframes fadeUp {
+  from  { opacity: 0; transform: translateY(16px); }
+  to    { opacity: 1; transform: translateY(0);}
 }
