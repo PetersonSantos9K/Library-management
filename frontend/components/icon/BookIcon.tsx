@@ -1,6 +1,5 @@
 export default function BookIcon({
   size = 24,
-  color = "currentColor",
   strokeWidth = 1.6,
   className = "",
 }) {
@@ -10,7 +9,7 @@ export default function BookIcon({
       height={size}
       viewBox="0 0 24 24"
       fill="none"
-      stroke={color}
+      stroke={'currentColor'}
       strokeWidth={strokeWidth}
       strokeLinecap="round"
       strokeLinejoin="round"

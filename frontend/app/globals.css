@@ -54,28 +54,28 @@ body{
   border: 0;
 }
 
-#landing-page > #hero::before{
+.hero-grid{
   content: '';
-  position: absolute;
-  inset: 0;
-  background-image: repeating-linear-gradient( 90deg, transparent, transparent 119px, rgba(255,255,255,0.015) 119px, rgba(255,255,255,0.015) 120px);
-  pointer-events: none;
-
+  background-image: repeating-linear-gradient( 
+    90deg, 
+    transparent, 
+    transparent 119px, 
+    rgba(255,255,255,0.015) 119px, 
+    rgba(255,255,255,0.015) 120px);
+  
 }
 
 
-#landing-page > #hero > #hero-glow{
-  position: absolute;
+.hero-glow{
   top: 20%;
   left: 50%;
   transform: translateX(-50%);
-  width: 600px;
+  width: clap(400%, 50vw, 800px);
   height: 400px;
   background: radial-gradient(ellipse, rgba(212,168,83,0.07) 0%, transparent 70%);
   pointer-events: none;
 }
-#landing-page > #hero > #hero-glow-bottom{
-    position: absolute;
+.hero-glow-bottom{
     bottom: -100px; 
     left: 50%; 
     transform: translateX(-50%);
@@ -85,10 +85,10 @@ body{
     pointer-events: none;
 }
 
-#landing-page > #hero > div > #hero-eyebrow{
+.hero > div > .hero-eyebrow{
   animation: fadeUp 0.6s ease 0.1s both;
 } 
-#hero-eyebrow::before, #landing-page > #hero > div > #hero-eyebrow::after{
+.hero-eyebrow::before, .hero-eyebrow::after{
   content: '';
   width: 20px; 
   height: 1px;
@@ -96,30 +96,27 @@ body{
   opacity: 0.5;
 }
 
-
-#landing-page > #hero > div > #hero-eyebrow::before, #landing-page > #hero > div > h1{
+.hero-eyebrow::before, .hero > div > h1{
   animation: fadeUp 0.7s ease 0.2s both;
 }
 
-#landing-page > #hero > div > #hero-eyebrow::before, #landing-page > #hero > div > #hero-sub{
+.hero-eyebrow::before, .hero-sub{
   animation: fadeUp 0.7s ease 0.35s both;
 }
 
-#landing-pate > #hero > #hero-cta #index-0::after{
+
+.primary::after{
     content: '';
     position: absolute; inset: 0;
     background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.1) 50%, transparent 70%);
     transform: translateX(-100%); transition: transform 0.5s;
 }
 
-#landing-pate > #hero > #hero-cta #index-0:hover::after{
+.primary:hover::after{
   transform: translateX(100%);
 }
 
-#landing-pate > #hero > #hero-cta #index-0:hover{
-  opacity: 0.9;
-  
-}
+
 
 
 @keyframes fadeUp {

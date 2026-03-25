@@ -1,19 +1,18 @@
-import { LogoIcon } from "@/components/icon/LogoIcon";
+import Image from "next/image";
+import Logo from "../../../public/icon.svg"
+
 
 export default function LogoFull() {
   return (
-    <div className="flex gap-3 items-center" id="logofull">
+    <div className="flex items-center gap-4 cursor-pointer" id="logofull">
+      <Image src={Logo} alt={"librarium-logo"} className="h-8 w-auto" priority/>
 
-      <LogoIcon dark={true}/>
+      <div className="flex flex-col leading-none">
 
-      <div className="flex flex-col gap-1 " id="logo_full_">
-        <span className="font-serif font-semibold uppercase text-text text-xl tracking-[0.12em] leading-none">
-            LIBRAR<span className="text-accent font-serif">IUM</span>
+        <span className="font-serif font-semibold uppercase text-text text-lg tracking-widest">
+            LIBRAR<span className="text-accent">IUM</span>
         </span>
-        <span className="text-text-logo text-[10px] font-medium tracking-[0.22em] leading-none uppercase">
-            Arquivo Pessoal
-        </span>
-
+       
       </div>
     </div>
   );
