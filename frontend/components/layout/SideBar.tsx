@@ -1,5 +1,5 @@
 'use client'
-import LogoFull from "../ul/logo/LogoFull";
+import LogoFull from "../ul/LogoFull";
 
 import {useEffect, useState } from "react";
 export default function SideBar() {
