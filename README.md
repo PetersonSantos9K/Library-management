@@ -1,16 +1,22 @@
-# 🚀 Gerenciador de Biblioteca
+# Gerenciador de Biblioteca
 
-> ⚠️ **Projeto em andamento.** Backend Spring Boot e frontend ainda incompletos.
-
----
-
-## 📌 Sobre o Projeto
-
-O sistema foi inicialmente desenvolvido com **Javalin** para validar rapidamente as regras de negócio. Atualmente está sendo migrado para **Spring Boot**, visando maior escalabilidade e organização. O frontend em **React** ainda está em construção.
+> **Projeto em andamento.** Backend Spring Boot e frontend ainda incompletos.
 
 ---
 
-## 🚀 Tecnologias Utilizadas
+## Sobre o Projeto
+
+É um gerenciador de bibliote onde poderá compartilhar sua biblioteca com outros usuarios e anexar PDFs aos livros.
+
+---
+## O que falta implementar
+
+* [ ] Backend Spring Boot
+* [ ] Frontend (em desenvolvimento)
+---
+
+
+## Tecnologias Utilizadas
 
 **Backend (beta) ✅**
 * Java · Javalin
@@ -19,16 +25,9 @@ O sistema foi inicialmente desenvolvido com **Javalin** para validar rapidamente
 * Java · Spring Boot · Maven
 
 **Frontend ⚠️**
-* JavaScript · React
+* TypeScript · React · Next
 
----
 
-## ⚠️ O que falta implementar
-
-* [ ] Backend Spring Boot
-* [ ] Frontend React
-
----
 
 ## ▶️ Como Executar
 
