@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Logo from "../../../public/icon.svg"
+import Logo from "../../public/icon.svg"
 
 
 export default function LogoFull() {
