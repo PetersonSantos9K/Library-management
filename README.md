@@ -2,6 +2,9 @@
 
 > **Projeto em andamento.** Backend Spring Boot e frontend ainda incompletos.
 
+>**Acesso antecipado:**  
+https://library-management-opal-psi.vercel.app/
+
 ---
 
 ## Sobre o Projeto
