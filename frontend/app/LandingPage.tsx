@@ -1,11 +1,11 @@
 "use client";
-import BookIcon from "@/components/icon/BookIcon";
 import SideBar from "@/components/layout/SideBar";
 import SpineIcon from "@/components/icon/SpineIcon";
 import { motion} from "motion/react";
 import landingPageDate from "@/data/landing-page/landingPageDate";
-import { useState } from "react";
 import {Feature} from "@/data/landing-page/landingPageDate"
+import ButtonAuth from "@/components/ul/ButtonAuth";
+import LogoName from "@/components/ul/LogoName";
 
 export default function LandingPage() {
     const {features, hero, socialProof} = landingPageDate();
@@ -84,39 +84,10 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <div className="hero-cta flex items-center justify-center gap-4 mt-2 z-10 relative">
-          {hero.map((e, index) => (
-            <button
-              key={index}
-              style={{
-                clipPath:
-                  "polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 0 100%)",
-                animation: "fadeUp 0.7s ease 0.35s both",
-              }}
-              className={`flex items-center gap-2 py-3 text-xs font-mono uppercase cursor-pointer
-                                ${e.variant}
-                                ${
-                                  e.variant === "primary"
-                                    ? `bg-accent relative overflow-hidden
-                                        text-bg border-none
-                                        shadow-[0_4px_32px_rgba(212,168,83,0.2)]
-                                        px-7
-                                        transition duration-150
-                                        hover:opacity-90
-                                        hover:shadow-[0_6px_40px_rgba(212,168,83,0.3)]`
-                                    : `bg-transparent text-text-sub
-                                        border border-border-md
-                                        px-6 tracking-[0.14em]
-                                        transition duration-200
-                                        hover:border-accent hover:text-accent`
-                                }
-                            `}
-            >
-              {index === 0 && <BookIcon className="text-bg" size={15} />}
-              {e.label}
-            </button>
-          ))}
-        </div>
+        <ButtonAuth 
+          buttonOne={hero[0].label} 
+          buttonTwe={hero[1].label} 
+          className="hero-cta flex items-center justify-center gap-4 mt-2 z-10 relative"/>
 
         <div className="absolute flex bottom-0  items-center justify-center z-0 w-full ">
           <SpineIcon />
@@ -183,6 +154,39 @@ export default function LandingPage() {
             ))}
         </motion.div>
       </section>
+
+      <section className="text-center relative overflow-hidden pb-30 border-t border-border pt-10">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+            
+            >
+                <p className="font-mono text-[9.5px] tracking-[0.2em] uppercase text-text-muted mb-5" >§ 02 · Comece agora</p>
+                <h2 className="font-serif text-4xl lg:text-[72px] md:text-[6vw] font-light text-text leading-[1.1] tracking-[-0.02em] mb-4.5">
+                    Seu acervo está<br />esperando por <em className="italic text-accent">você.</em>
+                </h2>
+
+                <p className="text-xs font-light text-text-sub mb-10 leading-[1.7]">Crie sua conta em segundos e comece a catalogar sua biblioteca hoje.</p>
+                
+                <ButtonAuth 
+                  buttonOne="Criar minha biblioteca"
+                  buttonTwe="Já tenho conta"
+                  className="flex items-center justify-center gap-4"
+                />
+
+                <p className="font-mono text-[9px] tracking-[0.14em] uppercase text-text-muted mt-4.5">Gratuito · Comece em 30 segundos</p>
+
+            </motion.div>
+
+      </section>
+
+      <footer className="border-t border-border py-6 px-12 flex items-center justify-between gap-3">
+
+          <LogoName className="text-[14px]"/>
+          <span className="font-mono text-[9px] tracking-[0.12em] uppercase text-text-muted">© 2026 Librarium · Arquivo Pessoal v1.0</span>
+      </footer>
+
     </section>
   );
 }

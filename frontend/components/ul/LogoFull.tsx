@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Logo from "../../public/icon.svg"
+import LogoName from "./LogoName";
 
 
 export default function LogoFull() {
@@ -9,10 +10,7 @@ export default function LogoFull() {
 
       <div className="flex flex-col leading-none">
 
-        <span className="font-serif font-semibold uppercase text-text text-lg tracking-widest">
-            LIBRAR<span className="text-accent">IUM</span>
-        </span>
-       
+       <LogoName className="text-lg"/>
       </div>
     </div>
   );
