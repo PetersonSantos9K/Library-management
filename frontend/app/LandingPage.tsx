@@ -2,44 +2,12 @@
 import SideBar from "@/components/layout/SideBar";
 import SpineIcon from "@/components/icon/SpineIcon";
 import { motion} from "motion/react";
-import landingPageDate from "@/data/landing-page/landingPageDate";
-import {Feature} from "@/data/landing-page/landingPageDate"
-import ButtonAuth from "@/components/ul/ButtonAuth";
+import landingPageDate from "@/features/landing-page/landingPageData";
 import LogoName from "@/components/ul/LogoName";
+import Button from "@/components/ul/Button";
 
 export default function LandingPage() {
-    const {features, hero, socialProof} = landingPageDate();
-
-
-
-    function CardFeature({element, index}: {element: Feature, index:number}){
-      
-      return  <article 
-                    className="
-                      relative overflow-hidden cursor-default 
-                      px-6.5 pt-7 pb-8 bg-bg-card border border-border
-                    hover:border-border-md transition-all duration-200 "
-                    key={index}
-                    style={{
-                        clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%)",
-                      }}
-                >   
-                    <p className="font-mono text-[9px] tracking-[0.16em] uppercase text-text-muted mb-[20px]">{element.num}</p>
-                    
-                    <div 
-                      className="w-12 h-10 flex items-center justify-center mb-[20px]" 
-                      style={{
-                        clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%)",
-                        backgroundColor: element.bg,
-                      }}>
-                      <element.icon color={element.color} size={17} strokeWidth={1.7}/>
-                    </div>
-                    
-                    
-                    <h3 className="font-serif text-[22px] font-normal text-text mb-[10px] leading-[1.2]">{element.title}</h3>
-                    <p className="text-[13px] font-light text-text-sub leading-[1.7]">{element.desc}</p>
-                </article>
-    }
+  const {features, hero, socialProof, ctaData} = landingPageDate();
 
   return (
     <section
@@ -84,11 +52,15 @@ export default function LandingPage() {
           </p>
         </div>
 
-        <ButtonAuth 
-          buttonOne={hero[0].label} 
-          buttonTwe={hero[1].label} 
-          className="hero-cta flex items-center justify-center gap-4 mt-2 z-10 relative"/>
+        <div className="hero-cta flex items-center justify-center gap-4 mt-2 z-10 relative">
 
+            <Button 
+              elements={hero}
+              className="flex items-center gap-2 py-3 text-xs font-mono uppercase cursor-pointer"
+              sizeIcon={15}
+            />
+        </div>
+        
         <div className="absolute flex bottom-0  items-center justify-center z-0 w-full ">
           <SpineIcon />
         </div>
@@ -143,14 +115,35 @@ export default function LandingPage() {
             </p>
           </div>
         </motion.div>
+
         <motion.div 
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
             className="grid grid-cols-3 gap-1"
         >
-            {features.map((e, i) => (
-                <CardFeature key={i} element={e} index={i}/>
+            {features.map((e) => (
+              <article 
+                key={e.title}
+                style={{
+                        clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%)",
+                      }}
+                className="relative overflow-hidden cursor-default px-6.5 pt-7 pb-8 bg-bg-card border border-border 
+                          hover:border-border-md transition-all duration-200"
+                >   
+                  <p className="font-mono text-[9px] tracking-[0.16em] uppercase text-text-muted mb-5">{e.num}</p>
+                  <div 
+                    style={{
+                          clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%)",
+                          backgroundColor: e.bg,
+                    }}
+                    className="w-12 h-10 flex items-center justify-center mb-5" 
+                  >
+                    <e.icon color={e.color} size={17} strokeWidth={1.7}/>
+                  </div>
+                  <h3 className="font-serif text-[22px] font-normal text-text mb-2.5 leading-[1.2]">{e.title}</h3>
+                  <p className="text-[13px] font-light text-text-sub leading-[1.7]">{e.desc}</p>
+                </article>
             ))}
         </motion.div>
       </section>
@@ -169,12 +162,13 @@ export default function LandingPage() {
 
                 <p className="text-xs font-light text-text-sub mb-10 leading-[1.7]">Crie sua conta em segundos e comece a catalogar sua biblioteca hoje.</p>
                 
-                <ButtonAuth 
-                  buttonOne="Criar minha biblioteca"
-                  buttonTwe="Já tenho conta"
-                  className="flex items-center justify-center gap-4"
-                />
-
+                <div className="flex items-center justify-center gap-4">
+                  <Button
+                    elements={ctaData}
+                    className="flex items-center gap-2 py-3 text-xs font-mono uppercase cursor-pointer"
+                    sizeIcon={15}
+                  />
+                </div>
                 <p className="font-mono text-[9px] tracking-[0.14em] uppercase text-text-muted mt-4.5">Gratuito · Comece em 30 segundos</p>
 
             </motion.div>

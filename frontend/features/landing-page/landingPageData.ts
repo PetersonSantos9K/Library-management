@@ -1,23 +1,6 @@
-import {
-  Book,
-  FileText,
-  Share2,
-  Lock,
-  Users,
-  Eye,
-  LucideIcon
-} from "lucide-react";
-import { ReactElement } from "react";
-
-const icons = {
-  book: Book,
-  pdf: FileText,
-  share: Share2,
-  lock: Lock,
-  users: Users,
-  eye: Eye
-};
-
+import {LucideIcon} from "lucide-react";
+import iconsFeatures from "@/features/icons/icons";
+import { element } from "@/components/ul/Button";
 
 export type Feature = {
   num: string;
@@ -31,14 +14,27 @@ export type Feature = {
 }
 
 export default function landingPageDate() {
-  const hero = [
+
+  const {icons} = iconsFeatures()
+  
+  const hero: element[] = [
     {
       label: "Criar meu arquivo",
-      variant: "primary",
+      specificCss: `bg-accent relative overflow-hidden
+                    text-bg border-none
+                    shadow-[0_4px_32px_rgba(212,168,83,0.2)]
+                    px-7 transition-all duration-200
+                    hover:bg-accent-hover`,
+      IconBehind: icons.book
     },
     {
       label: "Ver o sistema",
-      variant: "ghost",
+      specificCss: `bg-transparent text-text-sub
+                    border border-border-md
+                    px-6 tracking-[0.14em]
+                    transition duration-200
+                    hover:border-accent hover:text-accent`,
+      IconFront: icons.arrow
     },
   ];
 
@@ -109,9 +105,30 @@ export default function landingPageDate() {
         desc: "Métricas do seu acervo em tempo real: total de obras, PDFs anexados, autores cadastrados e acessos compartilhados.",
     }
   ];
+
+  const ctaData: element[] = [
+    {
+      label: "Criar minha biblioteca",
+      specificCss: `bg-accent relative overflow-hidden
+                    text-bg border-none
+                    shadow-[0_4px_32px_rgba(212,168,83,0.2)]
+                    px-7 transition-all duration-200
+                    hover:bg-accent-hover`,
+      IconBehind: icons.book
+    }, 
+    {
+      label: "Já tenho conta",
+      specificCss: `bg-transparent text-text-sub
+                    border border-border-md
+                    px-6 tracking-[0.14em]
+                    transition duration-200
+                    hover:border-accent hover:text-accent`,
+      IconFront: icons.arrow
+    }
+  ]
   
 
 
 
-  return {hero, socialProof, features}
+  return {hero, socialProof, features, ctaData}
 }
