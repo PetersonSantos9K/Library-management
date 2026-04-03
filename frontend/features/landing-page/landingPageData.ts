@@ -20,18 +20,18 @@ export default function landingPageDate() {
   const hero: element[] = [
     {
       label: "Criar meu arquivo",
-      specificCss: `bg-accent relative overflow-hidden
+      specificCss: `text-[10px] md:text-xs bg-accent relative overflow-hidden
                     text-bg border-none
                     shadow-[0_4px_32px_rgba(212,168,83,0.2)]
-                    px-7 transition-all duration-200
+                    md:px-7 transition-all duration-200
                     hover:bg-accent-hover`,
       IconBehind: icons.book
     },
     {
       label: "Ver o sistema",
-      specificCss: `bg-transparent text-text-sub
+      specificCss: `text-[10px] md:text-xs bg-transparent text-text-sub
                     border border-border-md
-                    px-6 tracking-[0.14em]
+                    md:px-6 tracking-[0.14em]
                     transition duration-200
                     hover:border-accent hover:text-accent`,
       IconFront: icons.arrow
@@ -112,7 +112,7 @@ export default function landingPageDate() {
       specificCss: `bg-accent relative overflow-hidden
                     text-bg border-none
                     shadow-[0_4px_32px_rgba(212,168,83,0.2)]
-                    px-7 transition-all duration-200
+                    md:px-7 transition-all duration-200
                     hover:bg-accent-hover`,
       IconBehind: icons.book
     }, 
@@ -120,7 +120,7 @@ export default function landingPageDate() {
       label: "Já tenho conta",
       specificCss: `bg-transparent text-text-sub
                     border border-border-md
-                    px-6 tracking-[0.14em]
+                    md:px-6 tracking-[0.14em]
                     transition duration-200
                     hover:border-accent hover:text-accent`,
       IconFront: icons.arrow

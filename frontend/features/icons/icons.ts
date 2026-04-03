@@ -6,6 +6,7 @@ import {
   Users,
   Eye,
   ArrowRight,
+  ArrowLeft,
  
 } from "lucide-react";
 
@@ -18,7 +19,8 @@ export default function iconsFeatures(){
     lock: Lock,
     users: Users,
     eye: Eye,
-    arrow: ArrowRight
+    arrow: ArrowRight,
+    left: ArrowLeft,
   };
   return {icons};
 }

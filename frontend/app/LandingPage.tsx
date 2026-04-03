@@ -1,14 +1,34 @@
 "use client";
 import SideBar from "@/components/layout/SideBar";
 import SpineIcon from "@/components/icon/SpineIcon";
-import { motion} from "motion/react";
+import { motion } from "motion/react";
 import landingPageDate from "@/features/landing-page/landingPageData";
 import LogoName from "@/components/ul/LogoName";
 import Button from "@/components/ul/Button";
+import iconsFeatures from "@/features/icons/icons";
+import { useState } from "react";
 
 export default function LandingPage() {
-  const {features, hero, socialProof, ctaData} = landingPageDate();
+  const [index, setIndex] = useState(0);
+  const { features, hero, socialProof, ctaData } = landingPageDate();
+  const { icons } = iconsFeatures();
 
+  function hadleNextCard() {
+    if (index === features.length - 1) {
+      setIndex(0);
+      return;
+    }
+    setIndex((index) => index + 1);
+  }
+  function handlePreviousCard() {
+    if (index === 0) {
+      setIndex(features.length - 1);
+      return;
+    }
+    setIndex((index) => index - 1);
+  }
+
+  console.log(index);
   return (
     <section
       id="landing-page"
@@ -53,14 +73,13 @@ export default function LandingPage() {
         </div>
 
         <div className="hero-cta flex items-center justify-center gap-4 mt-2 z-10 relative">
-
-            <Button 
-              elements={hero}
-              className="flex items-center gap-2 py-3 text-xs font-mono uppercase cursor-pointer"
-              sizeIcon={15}
-            />
+          <Button
+            elements={hero}
+            className="flex items-center gap-2 p-2 md:py-3 text-xs font-mono uppercase cursor-pointer"
+            sizeIcon={15}
+          />
         </div>
-        
+
         <div className="absolute flex bottom-0  items-center justify-center z-0 w-full ">
           <SpineIcon />
         </div>
@@ -70,12 +89,12 @@ export default function LandingPage() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="border-t border-border border-b  bg-bg-raised py-5 flex items-center justify-center gap-0"
+        className="border-t border-b border-border bg-bg-raised py-5 flex overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth md:overflow-visible md:items-center md:justify-center gap-0"
       >
         {socialProof.map((e, index) => (
           <div
             key={index}
-            className="flex flex-col items-center gap-1 px-10 border-r border-border last:border-r-0"
+            className="shrink-0  flex flex-col items-center gap-1 px-10 border-r border-border last:border-r-0"
           >
             <span className="font-serif text-[28px] font-light text-accent leading-none tracking-[0.01em]">
               {e.val}
@@ -87,7 +106,7 @@ export default function LandingPage() {
         ))}
       </motion.div>
 
-      <section className="py-25 px-12 max-w-275 mt-0 mx-auto flex flex-col gap-10 ">
+      <section className="py-25 px-12 max-w-275 mt-0 mx-auto flex flex-col gap-10 mb-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -116,71 +135,138 @@ export default function LandingPage() {
           </div>
         </motion.div>
 
-        <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="grid grid-cols-3 gap-1"
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
         >
-            {features.map((e) => (
-              <article 
-                key={e.title}
-                style={{
-                        clipPath: "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%)",
-                      }}
-                className="relative overflow-hidden cursor-default px-6.5 pt-7 pb-8 bg-bg-card border border-border 
-                          hover:border-border-md transition-all duration-200"
-                >   
-                  <p className="font-mono text-[9px] tracking-[0.16em] uppercase text-text-muted mb-5">{e.num}</p>
-                  <div 
+          <div className="hidden md:block ">
+            <div className="grid grid-cols-3 gap-1">
+              {features.map((e) => (
+                <article
+                  key={e.title}
+                  style={{
+                    clipPath:
+                      "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%)",
+                  }}
+                  className="relative overflow-hidden cursor-default px-6.5 pt-7 pb-8 bg-bg-card border border-border 
+                            hover:border-border-md transition-all duration-200"
+                >
+                  <p className="font-mono text-[9px] tracking-[0.16em] uppercase text-text-muted mb-5">
+                    {e.num}
+                  </p>
+                  <div
                     style={{
-                          clipPath: "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%)",
-                          backgroundColor: e.bg,
+                      clipPath:
+                        "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%)",
+                      backgroundColor: e.bg,
                     }}
-                    className="w-12 h-10 flex items-center justify-center mb-5" 
+                    className="w-12 h-10 flex items-center justify-center mb-5"
                   >
-                    <e.icon color={e.color} size={17} strokeWidth={1.7}/>
+                    <e.icon color={e.color} size={17} strokeWidth={1.7} />
                   </div>
-                  <h3 className="font-serif text-[22px] font-normal text-text mb-2.5 leading-[1.2]">{e.title}</h3>
-                  <p className="text-[13px] font-light text-text-sub leading-[1.7]">{e.desc}</p>
+                  <h3 className="font-serif text-[22px] font-normal text-text mb-2.5 leading-[1.2]">
+                    {e.title}
+                  </h3>
+                  <p className="text-[13px] font-light text-text-sub leading-[1.7]">
+                    {e.desc}
+                  </p>
                 </article>
-            ))}
+              ))}
+            </div>
+          </div>
+
+          <div className="block md:hidden">
+            <div className="flex items-center">
+              <button
+                className="cursor-pointer p-1 block md:hidden"
+                onClick={handlePreviousCard}
+              >
+                <icons.left size={15} />
+              </button>
+              {features.map(
+                (e, i) =>
+                  i === index && (
+                    <article
+                      key={e.title}
+                      style={{
+                        clipPath:
+                          "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%)",
+                      }}
+                      className="relative overflow-hidden cursor-default px-4 md:px-6.5 pt-7 pb-8 bg-bg-card border border-border 
+                              hover:border-border-md transition-all duration-200"
+                    >
+                      <p className="font-mono text-[9px] tracking-[0.16em] uppercase text-text-muted mb-5">
+                        {e.num}
+                      </p>
+                      <div
+                        style={{
+                          clipPath:
+                            "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%)",
+                          backgroundColor: e.bg,
+                        }}
+                        className="w-12 h-10 flex items-center justify-center mb-5"
+                      >
+                        <e.icon color={e.color} size={17} strokeWidth={1.7} />
+                      </div>
+                      <h3 className="font-serif text-[22px] font-normal text-text mb-2.5 leading-[1.2]">
+                        {e.title}
+                      </h3>
+                      <p className="text-[13px] font-light text-text-sub leading-[1.7]">
+                        {e.desc}
+                      </p>
+                    </article>
+                  ),
+              )}
+              <button
+                className="cursor-pointer p-1 block md:hidden"
+                onClick={hadleNextCard}
+              >
+                <icons.arrow size={15} />
+              </button>
+            </div>
+          </div>
         </motion.div>
       </section>
 
-      <section className="text-center relative overflow-hidden pb-30 border-t border-border pt-10">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-            
-            >
-                <p className="font-mono text-[9.5px] tracking-[0.2em] uppercase text-text-muted mb-5" >§ 02 · Comece agora</p>
-                <h2 className="font-serif text-4xl lg:text-[72px] md:text-[6vw] font-light text-text leading-[1.1] tracking-[-0.02em] mb-4.5">
-                    Seu acervo está<br />esperando por <em className="italic text-accent">você.</em>
-                </h2>
+      <section className="flex flex-col px-10 text-center mb-10">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <p className="font-mono text-[9.5px] tracking-[0.2em] uppercase text-text-muted mb-5">
+            § 02 · Comece agora
+          </p>
+          <h2 className="font-serif text-4xl lg:text-[72px] md:text-[6vw] font-light text-text leading-[1.1] tracking-[-0.02em] mb-4.5">
+            Seu acervo está
+            <br />
+            esperando por <em className="italic text-accent">você.</em>
+          </h2>
 
-                <p className="text-xs font-light text-text-sub mb-10 leading-[1.7]">Crie sua conta em segundos e comece a catalogar sua biblioteca hoje.</p>
-                
-                <div className="flex items-center justify-center gap-4">
-                  <Button
-                    elements={ctaData}
-                    className="flex items-center gap-2 py-3 text-xs font-mono uppercase cursor-pointer"
-                    sizeIcon={15}
-                  />
-                </div>
-                <p className="font-mono text-[9px] tracking-[0.14em] uppercase text-text-muted mt-4.5">Gratuito · Comece em 30 segundos</p>
+          <p className="text-xs font-light text-text-sub mb-10 leading-[1.7]">
+            Crie sua conta em segundos e comece a catalogar sua biblioteca hoje.
+          </p>
 
-            </motion.div>
-
+          <div className="flex items-center justify-center gap-4 relative">
+            <Button
+              elements={ctaData}
+              className="flex items-center gap-2 py-2 px-2  text-[10px] md:text-xs font-mono uppercase cursor-pointer"
+              sizeIcon={15}
+            />
+          </div>
+          <p className="font-mono text-[9px] tracking-[0.14em] uppercase text-text-muted mt-4.5">
+            Gratuito · Comece em 30 segundos
+          </p>
+        </motion.div>
       </section>
 
       <footer className="border-t border-border py-6 px-12 flex items-center justify-between gap-3">
-
-          <LogoName className="text-[14px]"/>
-          <span className="font-mono text-[9px] tracking-[0.12em] uppercase text-text-muted">© 2026 Librarium · Arquivo Pessoal v1.0</span>
+        <LogoName className="text-[14px]" />
+        <span className="font-mono text-[9px] tracking-[0.12em] uppercase text-text-muted">
+          © 2026 Librarium · Arquivo Pessoal v1.0
+        </span>
       </footer>
-
     </section>
   );
 }

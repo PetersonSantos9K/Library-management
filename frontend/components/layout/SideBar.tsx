@@ -28,17 +28,17 @@ export default function SideBar() {
 
     return (
         <nav className={`fixed top-0 left-0 right-0 z-50 h-16
-             flex items-centerbg-bg/80 backdrop-blur-md transition-all duration-300 border-b border-bg
+             flex items-center bg-bg/80 backdrop-blur-md transition-all duration-300 border-b border-bg
                 ${scrolled ? "border-b border-border" : ""}
              `}
         >
-            <div className="w-full max-w-275 mx-auto px-10 flex items-center justify-between">
+            <div className="w-full max-w-275 mx-auto px-10 flex items-center justify-between md:gap-0 gap-3">
                 <LogoFull />
                 <div className="flex items-center gap-4">
                     <Button 
                         elements={auth} 
                         key={1} 
-                        className={`py-2 px-6 text-[10px] uppercase tracking-[0.14em] font-medium font-mono cursor-pointer transition-all duration-200`}
+                        className={`md:py-2 md:px-6 p-2  text-[8px] md:text-xs uppercase tracking-[0.14em] font-medium font-mono cursor-pointer transition-all duration-200`}
                     />
                 </div>
             </div>
