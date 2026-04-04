@@ -1,7 +1,7 @@
 "use client";
 import SideBar from "@/components/layout/SideBar";
 import SpineIcon from "@/components/icon/SpineIcon";
-import { motion } from "motion/react";
+import { motion, AnimatePresence } from "motion/react";
 import landingPageDate from "@/features/landing-page/landingPageData";
 import LogoName from "@/components/ul/LogoName";
 import Button from "@/components/ul/Button";
@@ -28,7 +28,7 @@ export default function LandingPage() {
     setIndex((index) => index - 1);
   }
 
-  console.log(index);
+  const Icon = features[index].icon;
   return (
     <section
       id="landing-page"
@@ -37,11 +37,11 @@ export default function LandingPage() {
       <SideBar />
       <section
         className="
-                        hero flex flex-col 
-                        min-h-screen pt-32 
-                        pb-24 px-10 items-center
-                        justify-start relative
-                        overflow-hidden text-center"
+          hero flex flex-col 
+          min-h-screen pt-32                        
+          pb-24 px-10 items-center
+          justify-start relative
+          overflow-hidden text-center"
       >
         <div className="hero-grid absolute inset-0 pointer-events-none z-0" />
         <div className="hero-glow absolute z-0" />
@@ -56,7 +56,7 @@ export default function LandingPage() {
           </p>
 
           <h1
-            className="font-serif font-light leading-none tracking-[-0.02em] text-text
+            className=" font-serif font-light leading-none tracking-[-0.02em] text-text
                         opacity-0 text-[clamp(52px,7vw,88px)] text-center"
           >
             Sua coleção,
@@ -89,14 +89,14 @@ export default function LandingPage() {
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5 }}
-        className="border-t border-b border-border bg-bg-raised py-5 flex overflow-x-auto no-scrollbar snap-x snap-mandatory scroll-smooth md:overflow-visible md:items-center md:justify-center gap-0"
+        className="relative border-t border-b border-border bg-bg-raised py-5 flex flex-row md:overflow-visible md:items-center md:justify-center gap-1 md:gap-0"
       >
         {socialProof.map((e, index) => (
           <div
             key={index}
-            className="shrink-0  flex flex-col items-center gap-1 px-10 border-r border-border last:border-r-0"
+            className="flex flex-col items-center gap-1 w-50 border-r border-border last:border-r-0 text-center"
           >
-            <span className="font-serif text-[28px] font-light text-accent leading-none tracking-[0.01em]">
+            <span className="font-serif text-[20px] md:text-[28px] font-light text-accent leading-none tracking-[0.01em]">
               {e.val}
             </span>
             <span className="font-mono text-[9px] tracking-[0.16em] uppercase text-text-muted">
@@ -179,47 +179,46 @@ export default function LandingPage() {
           <div className="block md:hidden">
             <div className="flex items-center">
               <button
-                className="cursor-pointer p-1 block md:hidden"
+                className="cursor-pointer p-1"
                 onClick={handlePreviousCard}
               >
                 <icons.left size={15} />
               </button>
-              {features.map(
-                (e, i) =>
-                  i === index && (
-                    <article
-                      key={e.title}
+
+              <AnimatePresence mode="wait">
+                {features[index] && (
+                  <motion.article
+                    key={features[index].title}
+                    initial={{  opacity: 0}}
+                    animate={{  opacity: 1}}
+                    transition={{duration: 0.3}}
+                    style={{clipPath:"polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%)"}}
+                    className="relative overflow-hidden cursor-default px-4 md:px-6.5 pt-7 pb-8 bg-bg-card border border-border 
+                              hover:border-border-md transition-all duration-500"
+                  >
+                    <p className="font-mono text-[9px] tracking-[0.16em] uppercase text-text-muted mb-5">
+                      {features[index].num}
+                    </p>
+                    <div
                       style={{
-                        clipPath:
-                          "polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%)",
+                        clipPath:"polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%)",
+                        backgroundColor: features[index].bg,
                       }}
-                      className="relative overflow-hidden cursor-default px-4 md:px-6.5 pt-7 pb-8 bg-bg-card border border-border 
-                              hover:border-border-md transition-all duration-200"
+                      className="w-12 h-10 flex items-center justify-center mb-5"
                     >
-                      <p className="font-mono text-[9px] tracking-[0.16em] uppercase text-text-muted mb-5">
-                        {e.num}
-                      </p>
-                      <div
-                        style={{
-                          clipPath:
-                            "polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 0 100%)",
-                          backgroundColor: e.bg,
-                        }}
-                        className="w-12 h-10 flex items-center justify-center mb-5"
-                      >
-                        <e.icon color={e.color} size={17} strokeWidth={1.7} />
+                      <Icon color={features[index].color} size={17} strokeWidth={1.7} />
                       </div>
-                      <h3 className="font-serif text-[22px] font-normal text-text mb-2.5 leading-[1.2]">
-                        {e.title}
-                      </h3>
-                      <p className="text-[13px] font-light text-text-sub leading-[1.7]">
-                        {e.desc}
-                      </p>
-                    </article>
-                  ),
-              )}
+                        <h3 className="font-serif text-[22px] font-normal text-text mb-2.5 leading-[1.2]">
+                          {features[index].title}
+                        </h3>
+                        <p className="text-[13px] font-light text-text-sub leading-[1.7]">
+                          {features[index].desc}
+                        </p>
+                  </motion.article>
+                )}
+             </AnimatePresence>
               <button
-                className="cursor-pointer p-1 block md:hidden"
+                className="cursor-pointer p-1"
                 onClick={hadleNextCard}
               >
                 <icons.arrow size={15} />
