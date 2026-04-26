@@ -1,10 +1,10 @@
 package service;
 
-import repository.interfaces.LivroDAO;
+import repository.interfaces.BookDAO;
 import dto.response.LivroResponseDTO;
 import api.message.error.business.LivroBusinessMessage;
 import api.message.error.validation.LivroValidationMessage;
-import model.LivroModel;
+import model.BookModel;
 import exception.LivroException;
 
 import java.time.LocalDate;
@@ -12,12 +12,12 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
-public class LivroService extends BaseService<LivroResponseDTO, LivroModel> {
+public class LivroService extends BaseService<LivroResponseDTO, BookModel> {
 
-    private LivroDAO<LivroModel> livroDAO;
+    private BookDAO<BookModel> livroDAO;
 
     private AutorService autorService;
-    public LivroService(final AutorService autorService, final LivroDAO<LivroModel> livroDAO){
+    public LivroService(final AutorService autorService, final BookDAO<BookModel> livroDAO){
         this.autorService = autorService;
         this.livroDAO = livroDAO;
     }
@@ -35,7 +35,7 @@ public class LivroService extends BaseService<LivroResponseDTO, LivroModel> {
         livroDAO.buscarPorNome(tituloFormatado)
                 .orElseThrow(() -> new LivroException(409, LivroBusinessMessage.LIVRO_JA_CADASTRADO.getMessage()));
 
-        boolean inserirLivro = livroDAO.inserir(new LivroModel(id, tituloFormatado, anoPublicacao, autorIdFormatado));
+        boolean inserirLivro = livroDAO.inserir(new BookModel(id, tituloFormatado, anoPublicacao, autorIdFormatado));
 
         if (!inserirLivro) {
             throw new LivroException(404, LivroBusinessMessage.LIVRO_NAO_INSERIDO.getMessage());
@@ -48,7 +48,7 @@ public class LivroService extends BaseService<LivroResponseDTO, LivroModel> {
             throw new LivroException(400, LivroValidationMessage.VALIDAR_STRING.getMessage());
         }
 
-        Optional<LivroModel> livroModel = livroDAO.buscarPorId(id.trim());
+        Optional<BookModel> livroModel = livroDAO.buscarPorId(id.trim());
         return mapRow(
                 livroModel.orElseThrow(() -> new LivroException(404, LivroBusinessMessage.LIVRO_NAO_ENCONTRADO_POR_ID.getMessage()))
         );
@@ -56,7 +56,7 @@ public class LivroService extends BaseService<LivroResponseDTO, LivroModel> {
 
     public LivroResponseDTO buscarLivroPorTitulo(String titulo) {
         validarString(titulo);
-        Optional<LivroModel> livroModel = livroDAO.buscarPorNome(titulo.trim());
+        Optional<BookModel> livroModel = livroDAO.buscarPorNome(titulo.trim());
 
         return mapRow(
             livroModel.orElseThrow(() -> new LivroException(404, LivroBusinessMessage.LIVRO_NAO_ENCONTRADO_POR_TITULO.getMessage()))
@@ -74,7 +74,7 @@ public class LivroService extends BaseService<LivroResponseDTO, LivroModel> {
 
     public List<LivroResponseDTO> listaDeLivros() {
 
-        List<LivroModel> selectAll = livroDAO.selectAll();
+        List<BookModel> selectAll = livroDAO.selectAll();
         return mapList(selectAll);
     }
 
@@ -83,7 +83,7 @@ public class LivroService extends BaseService<LivroResponseDTO, LivroModel> {
 
         autorService.buscarAutorPorId(autorId);
 
-        List<LivroModel> livrosPorAutor = livroDAO.buscarLivrosPorAutor(autorId.trim());
+        List<BookModel> livrosPorAutor = livroDAO.buscarLivrosPorAutor(autorId.trim());
         return mapList(livrosPorAutor);
     }
 
@@ -121,7 +121,7 @@ public class LivroService extends BaseService<LivroResponseDTO, LivroModel> {
     }
 
     @Override
-    protected LivroResponseDTO mapRow(LivroModel row) {
+    protected LivroResponseDTO mapRow(BookModel row) {
         return new LivroResponseDTO(row.getId(), row.getTitulo(), row.getAnoPublicacao(), row.getAutorId());
     }
 

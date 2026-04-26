@@ -3,8 +3,8 @@ package repository.postgreSQL;
 import api.message.error.database.LivroDatabaseMessage;
 import database.ConnectionFactory;
 import repository.BaseDAO;
-import repository.interfaces.LivroDAO;
-import model.LivroModel;
+import repository.interfaces.BookDAO;
+import model.BookModel;
 import exception.DataBaseException;
 
 import java.sql.ResultSet;
@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 
-public class LivroDAOImpl extends BaseDAO<LivroModel> implements LivroDAO<LivroModel> {
+public class LivroDAOImpl extends BaseDAO<BookModel> implements BookDAO<BookModel> {
 
     private final String INSERIR_LIVRO = "INSERT INTO livros(id, titulo, ano_publicacao, autor_id) VALUES (?, ?, ?, ?)";
     private final String BUSCAR_LIVRO_ID = "SELECT * FROM livros WHERE id = ?";
@@ -23,7 +23,7 @@ public class LivroDAOImpl extends BaseDAO<LivroModel> implements LivroDAO<LivroM
 
 
     @Override
-    public boolean inserir(LivroModel livroModel) {
+    public boolean inserir(BookModel livroModel) {
         try(var conn = ConnectionFactory.getConnection();
             var pstInserirLivro = conn.prepareStatement(INSERIR_LIVRO)
         ){
@@ -44,13 +44,13 @@ public class LivroDAOImpl extends BaseDAO<LivroModel> implements LivroDAO<LivroM
     }
 
     @Override
-    public Optional<LivroModel> buscarPorId(String id) {
+    public Optional<BookModel> buscarPorId(String id) {
         try(var conn = ConnectionFactory.getConnection();
             var  pstBuscarLivroId = conn.prepareStatement(BUSCAR_LIVRO_ID)
         ){
             pstBuscarLivroId.setString(1, id);
 
-            LivroModel livroModel = findOne(pstBuscarLivroId);
+            BookModel livroModel = findOne(pstBuscarLivroId);
             return Optional.ofNullable(livroModel);
         } catch (SQLException ex) {
             throw new DataBaseException(
@@ -62,12 +62,12 @@ public class LivroDAOImpl extends BaseDAO<LivroModel> implements LivroDAO<LivroM
     }
 
     @Override
-    public Optional<LivroModel> buscarPorNome(String nome){
+    public Optional<BookModel> buscarPorNome(String nome){
         try(var conn = ConnectionFactory.getConnection();
             var  pstbuscarLivroNome = conn.prepareStatement(BUSCAR_LIVRO_NOME)
         ){
             pstbuscarLivroNome.setString(1, nome);
-            LivroModel livroModel = findOne(pstbuscarLivroNome);
+            BookModel livroModel = findOne(pstbuscarLivroNome);
             return Optional.ofNullable(livroModel);
         } catch (SQLException ex){
             throw new DataBaseException(
@@ -95,7 +95,7 @@ public class LivroDAOImpl extends BaseDAO<LivroModel> implements LivroDAO<LivroM
     }
 
     @Override
-    public List<LivroModel> selectAll(){
+    public List<BookModel> selectAll(){
         try(var conn = ConnectionFactory.getConnection();
             var pstBuscarLivros = conn.prepareStatement(BUSCAR_LIVROS)
         ){
@@ -110,7 +110,7 @@ public class LivroDAOImpl extends BaseDAO<LivroModel> implements LivroDAO<LivroM
     }
 
     @Override
-    public List<LivroModel> buscarLivrosPorAutor(String autorId) {
+    public List<BookModel> buscarLivrosPorAutor(String autorId) {
         try(var conn = ConnectionFactory.getConnection();
             var pstBuscarLivrosAutor = conn.prepareStatement(BUSCAR_LIVROS_AUTOR)
         ){
@@ -127,8 +127,8 @@ public class LivroDAOImpl extends BaseDAO<LivroModel> implements LivroDAO<LivroM
     }
 
     @Override
-    protected LivroModel mapRow(ResultSet rs) throws SQLException{
-        return new LivroModel(
+    protected BookModel mapRow(ResultSet rs) throws SQLException{
+        return new BookModel(
                 rs.getString("id"),
                 rs.getString("titulo"),
                 rs.getInt("ano_publicacao"),

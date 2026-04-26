@@ -26,10 +26,6 @@ public class App {
                 config.bundledPlugins.enableCors(cors -> cors.addRule(CorsPluginConfig.CorsRule::anyHost));
             });
 
-            app.events(eventConfig -> {
-                eventConfig.serverStopping(ConnectionFactory::closePool);
-            });
-
             autorController.registerRoutes(app);
             livroController.registerRotas(app);
             appException(app);

@@ -1,11 +1,13 @@
 package repository.postgreSQL;
 
 import database.ConnectionFactory;
+import jakarta.persistence.EntityManager;
 import repository.BaseDAO;
 import repository.interfaces.AutorDAO;
 import exception.DataBaseException;
 import api.message.error.database.AutorDatabaseMessage;
 import model.AutorModel;
+import util.JpaConfig;
 
 import java.sql.*;
 import java.util.List;

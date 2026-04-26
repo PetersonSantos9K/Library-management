@@ -1,6 +1,6 @@
 package controller;
 import io.javalin.Javalin;
-import model.LivroModel;
+import model.BookModel;
 import service.LivroService;
 
 import java.util.Map;
@@ -33,7 +33,7 @@ public class LivroController {
         });
 
         app.post("/livros", ctx -> {
-            LivroModel livro = ctx.bodyAsClass(LivroModel.class);
+            BookModel livro = ctx.bodyAsClass(BookModel.class);
             livroService.criarLivro(livro.getTitulo(), livro.getAnoPublicacao(), livro.getAutorId());
             ctx.status(201).json(Map.of(
                     "message", "Livro criado com sucesso"
