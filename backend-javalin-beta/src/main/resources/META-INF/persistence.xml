@@ -5,9 +5,9 @@
              https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd"
              version="3.0">
 
-    <persistence-unit name="biblioteca-jpa" transaction-type="RESOURCE_LOCAL">
-        <class>model.AutorModel</class>
-        <class>model.BookModel</class>
+    <persistence-unit name="library-jpa" transaction-type="RESOURCE_LOCAL">
+        <class>Author.AuthorModel</class>
+        <class>Book.BookModel</class>
         <properties>
             <property name="jakarta.persistence.jdbc.url"
                       value="jdbc:postgresql://localhost:5432/biblioteca"/>
@@ -27,6 +27,7 @@
                       value="true"/>
             <property name="hibernate.format_sql"
                       value="true"/>
+            <property name="jakarta.persistence.validation.mode" value="none"/>
         </properties>
     </persistence-unit>
 </persistence>

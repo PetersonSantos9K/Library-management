@@ -1,12 +1,10 @@
-package repository.postgreSQL;
+package Book;
 
 import api.message.error.database.DataBaseMessage;
 import exception.DataBaseException;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceException;
-import model.AuthorModel;
-import model.BookModel;
-import repository.interfaces.BookDAO;
+import Author.AuthorModel;
 import util.JpaConfig;
 
 import java.util.List;

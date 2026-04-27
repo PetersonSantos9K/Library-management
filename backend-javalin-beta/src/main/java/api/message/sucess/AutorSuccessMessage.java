@@ -2,14 +2,13 @@ package api.message.sucess;
 
 public enum AutorSuccessMessage {
 
-    // varios enums de mensagens de sucesso para as operações relacionadas a autores
+    SUCCESS("Operation completed successfully."),
 
-    AUTORES_ENCONTRADOS_SUCESS("Autores encontrados com sucesso."),
-    AUTOR_ENCONTRADO_POR_ID_SUCESS("Autor encontrado por ID com sucesso."),
-    AUTOR_ENCONTRADO_POR_NOME_SUCESS("Autor encontrado por nome com sucesso."),
-    AUTOR_CADASTRADO_SUCESS("Autor cadastrado com sucesso."),
-    AUTOR_EXCLUIDO_SUCESS("Autor removido com sucesso");
+    RESOURCE_FOUND("Resource found successfully."),
+    RESOURCES_FOUND("Resources found successfully."),
 
+    RESOURCE_CREATED("Resource created successfully."),
+    RESOURCE_DELETED("Resource deleted successfully.");
     private final String message;
     AutorSuccessMessage(String message) {
         this.message = message;

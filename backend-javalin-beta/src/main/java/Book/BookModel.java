@@ -1,8 +1,8 @@
-package model;
+package Book;
 
 
+import Author.AuthorModel;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Min;
 
 import java.util.UUID;
 
@@ -16,7 +16,6 @@ public class BookModel {
     private String title;
 
     @Column(name = "publication_year", nullable = false)
-    @Min(1400)
     private Integer publicationYear;
 
     @ManyToOne

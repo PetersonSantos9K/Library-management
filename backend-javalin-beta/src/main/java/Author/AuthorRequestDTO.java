@@ -1,19 +1,13 @@
-package dto.response;
+package Author;
 
-public class AutorResponseDTO {
+public class AuthorRequestDTO {
 
-    private String id;
     private String nome;
     private String nacionalidade;
 
-    public AutorResponseDTO(String id, String nome, String nacionalidade) {
-        this.id = id;
+    public AuthorRequestDTO(String nome, String nacionalidade) {
         this.nome = nome;
         this.nacionalidade = nacionalidade;
-    }
-
-    public String getId() {
-        return id;
     }
 
     public String getNome() {
@@ -23,4 +17,6 @@ public class AutorResponseDTO {
     public String getNacionalidade() {
         return nacionalidade;
     }
+
+
 }

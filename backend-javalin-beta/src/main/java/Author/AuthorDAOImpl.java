@@ -1,11 +1,9 @@
-package repository.postgreSQL;
+package Author;
 
 import api.message.error.database.DataBaseMessage;
 import exception.DataBaseException;
 import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceException;
-import model.AuthorModel;
-import repository.interfaces.AuthorDAO;
 import util.JpaConfig;
 
 import java.util.*;
@@ -14,14 +12,14 @@ public class AuthorDAOImpl implements AuthorDAO<AuthorModel> {
 
 
     @Override
-    public Optional<AuthorModel> insert(AuthorModel authorModel) {
+    public AuthorModel insert(AuthorModel authorModel) {
 
         var em = JpaConfig.getEmf().createEntityManager();
         try{
             em.getTransaction().begin();
             em.persist(authorModel);
             em.getTransaction().commit();
-            return Optional.ofNullable(authorModel);
+            return authorModel;
         } catch ( PersistenceException e){
             if(em.getTransaction().isActive()){
                 em.getTransaction().rollback();
@@ -81,11 +79,11 @@ public class AuthorDAOImpl implements AuthorDAO<AuthorModel> {
     }
 
     @Override
-    public List<AuthorModel> getAll(int first, int max) {
+    public List<AuthorModel> getAll(int page, int max) {
         List<AuthorModel> authorModels;
         try(var em = JpaConfig.getEmf().createEntityManager()){
             authorModels = em.createQuery("SELECT DISTINCT b FROM AuthorModel b ORDER BY b.name", AuthorModel.class)
-                    .setFirstResult(first)
+                    .setFirstResult(page * max)
                     .setMaxResults(max)
                     .getResultList();
         }
